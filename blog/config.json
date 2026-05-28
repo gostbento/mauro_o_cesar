@@ -1,0 +1,11 @@
+{
+  "title": "$ Blog",
+  "description": "Um blog minimalista com estilo terminal Unix.",
+  "author": "Author",
+  "social": {
+    "twitter": "https://twitter.com/seuusuario",
+    "tiktok": "https://tiktok.com/@seuusuario",
+    "instagram": "https://instagram.com/seuusuario",
+    "livepix": "https://livepix.gg/seuusuario"
+  }
+}
