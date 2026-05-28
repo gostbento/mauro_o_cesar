@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$ Blog Terminal</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header com links sociais -->
+        <header class="header">
+            <div class="terminal-line">
+                <span class="prompt">$</span>
+                <span class="user-host">user@blog</span>
+                <span class="path">~</span>
+                <span class="prompt">%</span>
+            </div>
+            
+            <div class="blog-description" id="blog-description">
+                # Blog description here
+            </div>
+            
+            <nav class="social-links">
+                <a href="#twitter" class="social-link" data-link="twitter">
+                    <span class="link-icon">></span> twitter
+                </a>
+                <a href="#tiktok" class="social-link" data-link="tiktok">
+                    <span class="link-icon">></span> tiktok
+                </a>
+                <a href="#instagram" class="social-link" data-link="instagram">
+                    <span class="link-icon">></span> instagram
+                </a>
+                <a href="#livepix" class="social-link" data-link="livepix">
+                    <span class="link-icon">></span> livepix
+                </a>
+            </nav>
+        </header>
+
+        <!-- Feed de Posts -->
+        <main class="blog-feed">
+            <div class="terminal-line">
+                <span class="prompt">$</span>
+                <span class="command">cat blog/posts/*</span>
+            </div>
+            
+            <div id="posts-container" class="posts-container"></div>
+            
+            <div class="terminal-line empty">
+                <span class="prompt">$</span>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
