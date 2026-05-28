@@ -1,50 +1,24 @@
 ---
-title: Bem-vindo ao Blog Terminal
-date: 28 de Maio, 2026
+title: Matando o linktree
+date: 2026/05/28
 ---
 
-# Bem-vindo! 👋
+# Sobre o linktree, controle, sei lá
+Faz aproximadamente dois anos e um pouco que eu to fazendo conteudo no tik tok, o que começou por causa da eleição municipal e culminou com um ban meu no reddit por criticas ao sionismo, e com o tempo eu tenho feito uma serie de coisas, extremamente descoordenadas na internet que acabam que não se conectam. </br> Essas coisas são:</br>
 
-Este é um exemplo de post no seu novo blog terminal. Simples, minimalista e totalmente customizável.
+- Os videos no tik tok 
+- Um youtube abandonado 
+- Um grupo de telgram 
+- Um manual de organização que foi interrompido pelo motivo
+- Uma serie de videos sobre manifestações que foram interrompidos pelo motivo 
+- Um tuitter que eu ainda não aprendi a usar 
+- entreotras
 
-## Como usar
+Mas se tem um bagulho que a internet não está me proporcionando é controle. E com controle eu quero dizer, capacidade de falar as coisas sem muito medo das coisas serem deletadas sem aviso. 
+e estar em qualquer plataforma, por mais simples que seja faz com que esse controle seja relegado, Aqui não é diferente, esse é um blog no github e o github tem capacidade de simplesmente me apagar a qualquer momento. 
+MAS 
+não é tão previsivel que ele venha a simplesmente me apagar ou a me censurar simplesmente por que o github não tem um algoritimo de amplificação. 
+então, pra ter um repertorio razoavelmente funcional de coisas que vão ficar online, independente da vontade do deus algoritimico do tiktok ou do instagram. tem isso aqui 
+e de quebra serve de agregador de links pras pessoas acharem o resto das minhas merda. 
 
-### Adicionar novos posts
-
-1. Crie um arquivo `.md` na pasta `posts/`
-2. Adicione o nome do arquivo na lista `postsList` no arquivo `assets/js/app.js`
-3. Use o formato YAML front matter para metadados:
-
-```
----
-title: Título do Post
-date: Data do Post
----
-```
-
-### Suportado
-
-Este blog suporta:
-
-- **Markdown completo** - títulos, listas, tabelas, etc
-- **Links externos** - clique em [exemplo](https://exemplo.com)
-- **Imagens** - ![alt text](url-da-imagem.jpg)
-- **Vídeos YouTube** - use a tag `<iframe>` com embed do YouTube
-- **Código** - `` ` ``código```` ou blocos ```código```
-
-## Exemplo de YouTube
-
-Copie o código de embed do YouTube e insira assim:
-
-```html
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-        frameborder="0" allowfullscreen></iframe>
-```
-
-## Personalizando
-
-- **Cores**: Edite as variáveis CSS em `assets/css/style.css`
-- **Links sociais**: Atualize `config.json`
-- **Fonte**: Modifique `--font-family` no CSS
-
-Boa sorte com seu blog! 🚀
+abrazos 
