@@ -57,17 +57,21 @@ async function loadPost(filename) {
 
 // Extrai metadados do markdown (formato YAML front matter)
 function extractMetadata(markdown) {
-    const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+    const match = markdown.match(/^-{3,}\s*[\r\n]+([\s\S]*?)[\r\n]+-{3,}\s*[\r\n]+([\s\S]*)$/);
     
     if (match) {
         const metaStr = match[1];
         const content = match[2];
         
         const metadata = {};
-        metaStr.split('\n').forEach(line => {
-            const [key, ...value] = line.split(':');
-            if (key && value.length) {
-                metadata[key.trim()] = value.join(':').trim();
+        metaStr.split(/[\r\n]+/).forEach(line => {
+            const colonIndex = line.indexOf(':');
+            if (colonIndex > 0) {
+                const key = line.substring(0, colonIndex).trim();
+                const value = line.substring(colonIndex + 1).trim();
+                if (key) {
+                    metadata[key] = value;
+                }
             }
         });
         
