@@ -34,7 +34,8 @@ function setupDescription() {
     }
 }
 
-// Lista de posts - adicione manualmente aqui na ordem que deseja
+// Lista de posts - adicione manualmente aqui.
+// A exibição automaticamente mostra os posts mais recentes primeiro quando há metadata de data.
 const postsList = [
     'primeiro-post',
     'segundo-post',
@@ -81,6 +82,42 @@ function extractMetadata(markdown) {
     return { metadata: {}, content: markdown };
 }
 
+// Converte a data do metadata em objeto Date para ordenação
+function parseDate(dateString) {
+    if (!dateString) return null;
+
+    const parsed = new Date(dateString);
+    if (!isNaN(parsed)) return parsed;
+
+    const regex = /(\d{1,2})\s*de\s*([A-Za-zçÇ]+),?\s*(\d{4})/i;
+    const match = dateString.trim().match(regex);
+    if (match) {
+        const day = Number(match[1]);
+        const monthName = match[2].toLowerCase();
+        const year = Number(match[3]);
+        const months = {
+            janeiro: 0,
+            fevereiro: 1,
+            março: 2,
+            abril: 3,
+            maio: 4,
+            junho: 5,
+            julho: 6,
+            agosto: 7,
+            setembro: 8,
+            outubro: 9,
+            novembro: 10,
+            dezembro: 11,
+        };
+        const month = months[monthName];
+        if (month !== undefined) {
+            return new Date(year, month, day);
+        }
+    }
+
+    return null;
+}
+
 // Renderiza um post
 function renderPost(filename, markdown) {
     const { metadata, content } = extractMetadata(markdown);
@@ -115,13 +152,30 @@ function escapeHtml(text) {
 async function loadAllPosts() {
     const container = document.getElementById('posts-container');
     container.innerHTML = '';
-    
+
+    const posts = [];
     for (const filename of postsList) {
         const markdown = await loadPost(filename);
         if (markdown) {
-            const postElement = renderPost(filename, markdown);
-            container.appendChild(postElement);
+            const { metadata } = extractMetadata(markdown);
+            posts.push({
+                filename,
+                markdown,
+                date: parseDate(metadata.date),
+            });
         }
+    }
+
+    posts.sort((a, b) => {
+        if (a.date && b.date) return b.date - a.date;
+        if (a.date) return -1;
+        if (b.date) return 1;
+        return 0;
+    });
+
+    for (const post of posts) {
+        const postElement = renderPost(post.filename, post.markdown);
+        container.appendChild(postElement);
     }
 }
 
