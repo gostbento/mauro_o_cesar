@@ -34,19 +34,37 @@ function setupDescription() {
     }
 }
 
-// Lista de posts - adicione manualmente aqui.
+// Lista de posts de fallback quando não há manifesto.
 // A exibição automaticamente mostra os posts mais recentes primeiro quando há metadata de data.
-const postsList = [
-    'primeiro-post',
-    'segundo-post',
-    // Adicione mais posts aqui
+const defaultPostsList = [
+    'Armadilha.md',
+    'primeiro-post.md',
+    'segundo-post.md',
 ];
+
+// Tenta carregar um manifesto automático de posts em posts/posts.json.
+async function loadPostsList() {
+    try {
+        const response = await fetch('posts/posts.json');
+        if (!response.ok) throw new Error('Manifesto não encontrado');
+
+        const files = await response.json();
+        if (Array.isArray(files) && files.length) {
+            return files.filter(file => file.toLowerCase().endsWith('.md'));
+        }
+    } catch (error) {
+        console.warn('Não foi possível carregar posts/posts.json, usando fallback:', error);
+    }
+
+    return defaultPostsList;
+}
 
 // Carrega um arquivo markdown
 async function loadPost(filename) {
     try {
-        const response = await fetch(`posts/${filename}.md`);
-        if (!response.ok) throw new Error(`Erro ao carregar: ${filename}`);
+        const filepath = filename.toLowerCase().endsWith('.md') ? filename : `${filename}.md`;
+        const response = await fetch(`posts/${filepath}`);
+        if (!response.ok) throw new Error(`Erro ao carregar: ${filepath}`);
         
         const markdown = await response.text();
         return markdown;
@@ -122,7 +140,7 @@ function parseDate(dateString) {
 function renderPost(filename, markdown) {
     const { metadata, content } = extractMetadata(markdown);
     
-    const title = metadata.title || filename;
+    const title = metadata.title || filename.replace(/\.md$/i, '');
     const date = metadata.date || 'Data não especificada';
     const html = marked.parse(content);
     
@@ -153,8 +171,9 @@ async function loadAllPosts() {
     const container = document.getElementById('posts-container');
     container.innerHTML = '';
 
+    const postFiles = await loadPostsList();
     const posts = [];
-    for (const filename of postsList) {
+    for (const filename of postFiles) {
         const markdown = await loadPost(filename);
         if (markdown) {
             const { metadata } = extractMetadata(markdown);
