@@ -169,6 +169,10 @@ async function loadAllPosts() {
     const postFiles = await loadPostsList();
     const posts = [];
     for (const filename of postFiles) {
+        const markdown = await loadPost(filename);
+        if (markdown) {
+            const { metadata } = extractMetadata(markdown);
+            posts.push({
                 filename,
                 markdown,
                 date: parseDate(metadata.date),
